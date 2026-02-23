@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>DEMO HOTEL - Premium Luxury Experience</title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="brand-logo-wrapper">
+                <img src="https://s3-cdn.hotellinksolutions.com/hls/data/2575/website/general/mlg/demo-hl-mob.png"
+                    alt="DEMO HOTEL Logo" class="brand-logo">
+            </div>
+
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#rooms" class="nav-link">Rooms</a></li>
+                <li><a href="#amenities" class="nav-link">Amenities</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#booking" class="nav-link">Book</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Menu -->
+    <div class="sidebar">
+        <button class="close-btn" id="closeBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="sidebar-menu">
+            <li><a href="#home" class="sidebar-link">Home</a></li>
+            <li><a href="#rooms" class="sidebar-link">Rooms</a></li>
+            <li><a href="#amenities" class="sidebar-link">Amenities</a></li>
+            <li><a href="#gallery" class="sidebar-link">Gallery</a></li>
+            <li><a href="#booking" class="sidebar-link">Book</a></li>
+            <li><a href="#contact" class="sidebar-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Hero Section with Slideshow -->
+    <section id="home" class="hero-demo">
+        <div class="hero-slideshow">
+            <!-- Slide 1 -->
+            <div class="hero-slide active"
+                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH_zdep6bHFgT-Q38-vgksyaehc56zUxzvYg&s');">
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="hero-slide"
+                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSypLSsVC2akWRIYwoKIIVgY0eUacibDG0eSA&s');">
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="hero-slide"
+                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjrHgf-rkb0DTmU8D1GPUx7cvxpT3WuKADkQ&s');">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <h1 class="hero-title">DEMO HOTEL</h1>
+                <p class="hero-tagline">Where Exceptional Experiences Begin</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="bookNowBtn">Book Now</button>
+                    <button class="btn btn-secondary" id="viewRoomsBtn">View Rooms</button>
+                </div>
+            </div>
+
+            <button class="slide-arrow left-arrow" id="slideLeft" aria-label="Previous Image">❮</button>
+            <button class="slide-arrow right-arrow" id="slideRight" aria-label="Next Image">❯</button>
+
+            <div class="slide-indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Rooms Section -->
+    <section id="rooms" class="rooms-section">
+        <div class="section-header">
+            <h2>Our Featured Rooms</h2>
+            <p>Discover our exquisite room collection</p>
+        </div>
+
+        <div class="rooms-grid">
+            <!-- Deluxe Room -->
+            <div class="room-card">
+                <div class="room-image">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&h=400&fit=crop"
+                        alt="Deluxe Room">
+                    <div class="room-overlay">
+                        <button class="btn btn-primary">View Details</button>
+                    </div>
+                </div>
+                <div class="room-info">
+                    <h3>Deluxe Room</h3>
+                    <p class="room-description">Spacious room with premium amenities and city views</p>
+                    <ul class="room-features">
+                        <li><i class="fas fa-wifi"></i> High-Speed WiFi</li>
+                        <li><i class="fas fa-tv"></i> Smart TV</li>
+                        <li><i class="fas fa-bath"></i> Luxury Bath</li>
+                    </ul>
+                    <div class="room-footer">
+                        <span class="room-price">$250/night</span>
+                        <button class="btn-book" data-room="Deluxe Room">Reserve</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Executive Suite -->
+            <div class="room-card">
+                <div class="room-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&h=400&fit=crop"
+                        alt="Executive Suite">
+                    <div class="room-overlay">
+                        <button class="btn btn-primary">View Details</button>
+                    </div>
+                </div>
+                <div class="room-info">
+                    <h3>Executive Suite</h3>
+                    <p class="room-description">Elegant suite with separate living area and premium services</p>
+                    <ul class="room-features">
+                        <li><i class="fas fa-concierge-bell"></i> Concierge Service</li>
+                        <li><i class="fas fa-sofa"></i> Living Room</li>
+                        <li><i class="fas fa-wine-glass"></i> Minibar</li>
+                    </ul>
+                    <div class="room-footer">
+                        <span class="room-price">$400/night</span>
+                        <button class="btn-book" data-room="Executive Suite">Reserve</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Presidential Suite -->
+            <div class="room-card">
+                <div class="room-image">
+                    <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e143?w=500&h=400&fit=crop"
+                        alt="Presidential Suite">
+                    <div class="room-overlay">
+                        <button class="btn btn-primary">View Details</button>
+                    </div>
+                </div>
+                <div class="room-info">
+                    <h3>Presidential Suite</h3>
+                    <p class="room-description">Our most luxurious offering with panoramic views and exclusive amenities
+                    </p>
+                    <ul class="room-features">
+                        <li><i class="fas fa-crown"></i> Exclusive Amenities</li>
+                        <li><i class="fas fa-hot-tub"></i> Private Jacuzzi</li>
+                        <li><i class="fas fa-utensils"></i> Private Dining</li>
+                    </ul>
+                    <div class="room-footer">
+                        <span class="room-price">$750/night</span>
+                        <button class="btn-book" data-room="Presidential Suite">Reserve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="amenities-section">
+        <div class="section-header">
+            <h2>World-Class Amenities</h2>
+            <p>Experience unparalleled hospitality and comfort</p>
+        </div>
+
+        <div class="amenities-grid">
+            <div class="amenity-card">
+                <div class="amenity-icon">
+                    <i class="fas fa-swimming-pool"></i>
+                </div>
+                <h3>Infinity Pool</h3>
+                <p>Olympic-sized heated pool with panoramic views</p>
+            </div>
+
+            <div class="amenity-card">
+                <div class="amenity-icon">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <h3>Spa & Wellness</h3>
+                <p>Full-service spa with massage and treatments</p>
+            </div>
+
+            <div class="amenity-card">
+                <div class="amenity-icon">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <h3>Fitness Center</h3>
+                <p>State-of-the-art gym with personal trainers</p>
+            </div>
+
+            <div class="amenity-card">
+                <div class="amenity-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Fine Dining</h3>
+                <p>Michelin-starred restaurants and bars</p>
+            </div>
+
+            <div class="amenity-card">
+                <div class="amenity-icon">
+                    <i class="fas fa-concierge-bell"></i>
+                </div>
+                <h3>Concierge Service</h3>
+                <p>24/7 personalized concierge assistance</p>
+            </div>
+
+            <div class="amenity-card">
+                <div class="amenity-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3>High-Speed WiFi</h3>
+                <p>Ultra-fast internet throughout the hotel</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="section-header">
+            <h2>Gallery</h2>
+            <p>Explore the beauty of our hotel</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop"
+                    alt="Lobby">
+                <div class="gallery-overlay">
+                    <h3>Grand Lobby</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1584622181563-430f63602d4b?w=400&h=300&fit=crop"
+                    alt="Restaurant">
+                <div class="gallery-overlay">
+                    <h3>Fine Dining</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1599019570385-f1bca6199053?w=400&h=300&fit=crop" alt="Pool">
+                <div class="gallery-overlay">
+                    <h3>Infinity Pool</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1560438905-919c08bad1f1?w=400&h=300&fit=crop" alt="Spa">
+                <div class="gallery-overlay">
+                    <h3>Luxury Spa</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop" alt="Room">
+                <div class="gallery-overlay">
+                    <h3>Suites</h3>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1535358636894-b96a83a36e07?w=400&h=300&fit=crop"
+                    alt="Conference">
+                <div class="gallery-overlay">
+                    <h3>Events</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="booking" class="booking-section">
+        <div class="booking-container">
+            <div class="booking-header">
+                <h2>Book Your Stay</h2>
+                <p>Send us an enquiry and our team will get back to you shortly</p>
+            </div>
+
+            <form class="booking-form" id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="checkIn">Check-in Date</label>
+                        <input type="date" id="checkIn" name="checkIn">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="checkOut">Check-out Date</label>
+                        <input type="date" id="checkOut" name="checkOut">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roomType">Room Type</label>
+                        <select id="roomType" name="roomType">
+                            <option value="">Select a room type</option>
+                            <option value="deluxe">Deluxe Room</option>
+                            <option value="executive">Executive Suite</option>
+                            <option value="presidential">Presidential Suite</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message"
+                        placeholder="Tell us more about your stay or special requirements..." rows="5"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-submit">Send Enquiry</button>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <div class="success-content">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Thank You!</h3>
+                    <p>Your enquiry has been received successfully. We'll get back to you within 24 hours.</p>
+                    <button class="btn btn-secondary btn-small" id="closeSuccess" type="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Need More Information?</h2>
+            <p>Call us or visit our website for more details about our rooms and services.</p>
+            <button class="btn btn-primary btn-large" id="ctaContactBtn">Contact Us</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>DEMO HOTEL</h3>
+                <p>Delivering luxury experiences since 2010</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#rooms">Rooms</a></li>
+                    <li><a href="#amenities">Amenities</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, City</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@demohotel.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 DEMO HOTEL. All rights reserved. | <a href="#" style="color: #fff">Privacy Policy</a> | <a href="#" style="color: #fff">Terms of
+                    Service</a></p>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>
