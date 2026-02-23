@@ -12,16 +12,12 @@ let currentSlide = 0;
 let autoPlayTimer;
 let isTransitioning = false;
 
-console.log('Slides found:', slides.length); // Debug
-
 function showSlide(n, direction = 'next') {
     if (isTransitioning) return;
     isTransitioning = true;
 
-    // Remove active class from current slide
     slides[currentSlide].classList.remove('active', 'slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right');
 
-    // Add animation based on direction
     if (direction === 'next') {
         slides[currentSlide].classList.add('slide-out-left');
         slides[n].classList.add('slide-in-right');
@@ -30,23 +26,18 @@ function showSlide(n, direction = 'next') {
         slides[n].classList.add('slide-in-left');
     }
 
-    // Update indicators
     indicators.forEach(ind => ind.classList.remove('active'));
     indicators[n].classList.add('active');
 
-    // After animation completes
     setTimeout(() => {
         slides[currentSlide].classList.remove('slide-out-left', 'slide-out-right');
         slides[n].classList.remove('slide-in-left', 'slide-in-right');
-        
         slides[currentSlide].classList.remove('active');
         slides[n].classList.add('active');
-
         currentSlide = n;
         isTransitioning = false;
     }, 700);
 
-    // Reset auto-play timer
     resetAutoPlay();
 }
 
@@ -62,24 +53,14 @@ function prevSlide() {
 
 function resetAutoPlay() {
     clearTimeout(autoPlayTimer);
-    autoPlayTimer = setTimeout(nextSlide, 5000); // Change image every 5 seconds
+    autoPlayTimer = setTimeout(nextSlide, 5000);
 }
 
-// Start auto-play
 resetAutoPlay();
 
-// Arrow button click handlers
-leftArrow.addEventListener('click', () => {
-    console.log('Left arrow clicked');
-    prevSlide();
-});
+leftArrow.addEventListener('click', () => prevSlide());
+rightArrow.addEventListener('click', () => nextSlide());
 
-rightArrow.addEventListener('click', () => {
-    console.log('Right arrow clicked');
-    nextSlide();
-});
-
-// Indicator dot click handlers
 indicators.forEach((indicator, index) => {
     indicator.addEventListener('click', () => {
         if (index !== currentSlide) {
@@ -89,72 +70,58 @@ indicators.forEach((indicator, index) => {
     });
 });
 
-// Pause auto-play on hover
-heroSlideshow.addEventListener('mouseenter', () => {
-    clearTimeout(autoPlayTimer);
-});
-
-// Resume auto-play when mouse leaves
-heroSlideshow.addEventListener('mouseleave', () => {
-    resetAutoPlay();
-});
+heroSlideshow.addEventListener('mouseenter', () => clearTimeout(autoPlayTimer));
+heroSlideshow.addEventListener('mouseleave', () => resetAutoPlay());
 
 // =====================
 // SCROLL FUNCTIONALITY
 // =====================
 
-// Reserve Button --> Scroll to Booking Form
 document.querySelectorAll('.btn-book').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', function (e) {
         e.preventDefault();
         const bookingSection = document.getElementById('booking');
         if (bookingSection) {
-            bookingSection.scrollIntoView({ behavior: 'smooth' });
+            bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(() => {
-                document.getElementById('fullName')?.focus();
-            }, 700);
+                const nameField = document.getElementById('fullName');
+                if (nameField) nameField.focus();
+            }, 800);
         }
     });
 });
 
-// Hero "Book Now" Button --> Scroll to Booking Form
 const bookNowBtn = document.getElementById('bookNowBtn');
 if (bookNowBtn) {
     bookNowBtn.addEventListener('click', () => {
         const bookingSection = document.getElementById('booking');
         if (bookingSection) {
-            bookingSection.scrollIntoView({ behavior: 'smooth' });
+            bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(() => {
-                document.getElementById('fullName')?.focus();
-            }, 700);
+                const nameField = document.getElementById('fullName');
+                if (nameField) nameField.focus();
+            }, 800);
         }
     });
 }
 
-// Hero "View Rooms" Button --> Scroll to Rooms Section
 const viewRoomsBtn = document.getElementById('viewRoomsBtn');
 if (viewRoomsBtn) {
     viewRoomsBtn.addEventListener('click', () => {
         const roomsSection = document.getElementById('rooms');
-        if (roomsSection) {
-            roomsSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (roomsSection) roomsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 }
 
-// CTA "Contact Us" Button --> Scroll to Footer
 const ctaContactBtn = document.getElementById('ctaContactBtn');
 if (ctaContactBtn) {
     ctaContactBtn.addEventListener('click', () => {
-        const footer = document.querySelector('footer');
-        if (footer) {
-            footer.scrollIntoView({ behavior: 'smooth' });
-        }
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     });
 }
 
 // =====================
-// MOBILE MENU FUNCTIONALITY
+// MOBILE MENU
 // =====================
 
 const hamburger = document.querySelector('.hamburger');
@@ -179,31 +146,18 @@ function closeSidebar() {
 hamburger?.addEventListener('click', toggleSidebar);
 closeBtn?.addEventListener('click', closeSidebar);
 overlay?.addEventListener('click', closeSidebar);
-
-sidebarLinks.forEach(link => {
-    link.addEventListener('click', closeSidebar);
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeSidebar();
-    }
-});
+sidebarLinks.forEach(link => link.addEventListener('click', closeSidebar));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
 
 // =====================
-// SMOOTH SCROLL ENHANCEMENT
+// SMOOTH SCROLL FOR NAV LINKS
 // =====================
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
 
@@ -212,120 +166,114 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // =====================
 
 const navbar = document.querySelector('.navbar');
-let lastScrollTop = 0;
 
 window.addEventListener('scroll', () => {
-    let currentScroll = window.scrollY;
-
-    if (currentScroll > 50) {
-        navbar.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.12)';
-    } else {
-        navbar.style.boxShadow = '0 4px 20px rgba(20, 49, 86, 0.15)';
-    }
-
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    navbar.style.boxShadow = window.scrollY > 50
+        ? '0 8px 24px rgba(0, 0, 0, 0.12)'
+        : '0 4px 20px rgba(20, 49, 86, 0.15)';
 });
 
 // =====================
-// INTERSECTION OBSERVER FOR ANIMATIONS
+// SCROLL ANIMATIONS
 // =====================
 
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
+const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-const elementsToAnimate = document.querySelectorAll(
-    '.room-card, .amenity-card, .gallery-item'
-);
-
-elementsToAnimate.forEach(element => {
-    element.classList.add('scroll-animate');
-    observer.observe(element);
+document.querySelectorAll('.room-card, .amenity-card, .gallery-item').forEach(el => {
+    el.classList.add('scroll-animate');
+    scrollObserver.observe(el);
 });
 
 // =====================
-// BOOKING FORM VALIDATION
+// ACTIVE NAV LINK
+// =====================
+
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    let current = '';
+    sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 200) current = section.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) link.classList.add('active');
+    });
+}
+
+window.addEventListener('scroll', updateActiveNavLink);
+
+// =====================
+// FORM VALIDATION
 // =====================
 
 const bookingForm = document.getElementById('bookingForm');
-const successMessage = document.getElementById('successMessage');
-const closeSuccessBtn = document.getElementById('closeSuccess');
-const formInputs = bookingForm?.querySelectorAll('input, textarea, select') || [];
+const submitBtn = bookingForm?.querySelector('.btn-submit');
 
-function showError(input, message) {
+function showFieldError(input, message) {
     const formGroup = input.closest('.form-group');
     if (formGroup) {
         formGroup.classList.add('error');
         const errorMsg = formGroup.querySelector('.error-message');
-        if (errorMsg) {
-            errorMsg.textContent = message;
-        }
+        if (errorMsg) errorMsg.textContent = message;
     }
 }
 
-function validateForm() {
-    let isValid = true;
-    const fullName = document.getElementById('fullName');
-    const email = document.getElementById('email');
-    const phone = document.getElementById('phone');
-
-    // Clear previous errors
+function clearErrors() {
     document.querySelectorAll('.form-group').forEach(group => {
         group.classList.remove('error');
         const errorMsg = group.querySelector('.error-message');
         if (errorMsg) errorMsg.textContent = '';
     });
+}
 
-    // Validate Full Name
-    if (fullName.value.trim() === '') {
-        showError(fullName, 'Full name is required');
-        isValid = false;
-    } else if (fullName.value.trim().length < 3) {
-        showError(fullName, 'Full name must be at least 3 characters');
-        isValid = false;
-    }
+function validateForm() {
+    let isValid = true;
+    clearErrors();
 
-    // Validate Email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email.value.trim() === '') {
-        showError(email, 'Email address is required');
-        isValid = false;
-    } else if (!emailRegex.test(email.value.trim())) {
-        showError(email, 'Please enter a valid email address');
-        isValid = false;
-    }
-
-    // Validate Phone
-    const phoneRegex = /^[0-9\s\-\+\(\)]+$/;
-    if (phone.value.trim() === '') {
-        showError(phone, 'Phone number is required');
-        isValid = false;
-    } else if (!phoneRegex.test(phone.value.trim()) || phone.value.trim().length < 10) {
-        showError(phone, 'Please enter a valid phone number');
-        isValid = false;
-    }
-
-    // Validate Check-in and Check-out dates if provided
+    const fullName = document.getElementById('fullName');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
     const checkIn = document.getElementById('checkIn');
     const checkOut = document.getElementById('checkOut');
     const today = new Date().toISOString().split('T')[0];
 
+    if (!fullName.value.trim()) {
+        showFieldError(fullName, 'Full name is required');
+        isValid = false;
+    } else if (fullName.value.trim().length < 3) {
+        showFieldError(fullName, 'Full name must be at least 3 characters');
+        isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim()) {
+        showFieldError(email, 'Email address is required');
+        isValid = false;
+    } else if (!emailRegex.test(email.value.trim())) {
+        showFieldError(email, 'Please enter a valid email address');
+        isValid = false;
+    }
+
+    const phoneRegex = /^[0-9\s\-\+\(\)]+$/;
+    if (!phone.value.trim()) {
+        showFieldError(phone, 'Phone number is required');
+        isValid = false;
+    } else if (!phoneRegex.test(phone.value.trim()) || phone.value.trim().length < 10) {
+        showFieldError(phone, 'Please enter a valid phone number');
+        isValid = false;
+    }
+
     if (checkIn.value && checkIn.value < today) {
-        showError(checkIn, 'Check-in date must be today or in the future');
+        showFieldError(checkIn, 'Check-in date must be today or in the future');
         isValid = false;
     }
 
     if (checkOut.value && checkIn.value && checkOut.value <= checkIn.value) {
-        showError(checkOut, 'Check-out date must be after check-in date');
+        showFieldError(checkOut, 'Check-out date must be after check-in date');
         isValid = false;
     }
 
@@ -333,73 +281,147 @@ function validateForm() {
 }
 
 // =====================
-// FORM SUBMISSION
+// SUBMIT BUTTON STATES
 // =====================
 
-if (bookingForm) {
-    bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+function setButtonLoading() {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span class="btn-spinner"></span> Sending...`;
+    submitBtn.style.opacity = '0.85';
+    submitBtn.style.cursor = 'not-allowed';
+}
 
-        // Validate form
-        if (!validateForm()) {
-            return;
-        }
+function setButtonSuccess() {
+    submitBtn.innerHTML = `
+        <svg style="width:18px;height:18px;vertical-align:middle;margin-right:8px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        Enquiry Sent!
+    `;
+    submitBtn.style.background = 'linear-gradient(90deg, #27AE60, #2ecc71)';
+    submitBtn.style.color = '#fff';
+    submitBtn.style.opacity = '1';
+}
 
-        // Collect form data
-        const formData = {
-            fullName: document.getElementById('fullName').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            checkIn: document.getElementById('checkIn').value || 'Not specified',
-            checkOut: document.getElementById('checkOut').value || 'Not specified',
-            roomType: document.getElementById('roomType').value || 'Not selected',
-            message: document.getElementById('message').value || 'No message',
-            submittedAt: new Date().toLocaleString()
-        };
+function resetButton() {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Send Enquiry';
+    submitBtn.style.background = '';
+    submitBtn.style.color = '';
+    submitBtn.style.opacity = '1';
+    submitBtn.style.cursor = 'pointer';
+}
 
-        // Log form data (in real application, this would be sent to a server)
-        console.log('Form Submitted:', formData);
+// =====================
+// TOAST NOTIFICATIONS
+// =====================
 
-        // Show success message
-        showSuccessMessage();
+function showToast(type, message) {
+    const existing = document.querySelector('.enquiry-toast');
+    if (existing) existing.remove();
 
-        // Reset form
-        bookingForm.reset();
+    const icon = type === 'success'
+        ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`
+        : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+
+    const toast = document.createElement('div');
+    toast.className = `enquiry-toast enquiry-toast--${type}`;
+    toast.innerHTML = `
+        <span class="enquiry-toast__icon">${icon}</span>
+        <span class="enquiry-toast__msg">${message}</span>
+        <button class="enquiry-toast__close" aria-label="Close">✕</button>
+    `;
+
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => toast.classList.add('enquiry-toast--visible'));
     });
+
+    toast.querySelector('.enquiry-toast__close').addEventListener('click', () => dismissToast(toast));
+
+    const timer = setTimeout(() => dismissToast(toast), type === 'success' ? 5000 : 7000);
+    toast._timer = timer;
+}
+
+function dismissToast(toast) {
+    clearTimeout(toast._timer);
+    toast.classList.remove('enquiry-toast--visible');
+    setTimeout(() => toast.remove(), 400);
 }
 
 // =====================
-// SUCCESS MESSAGE FUNCTIONS
+// SUCCESS MODAL
 // =====================
 
-function showSuccessMessage() {
+const successMessage = document.getElementById('successMessage');
+const closeSuccessBtn = document.getElementById('closeSuccess');
+
+function showSuccessModal() {
     successMessage.classList.add('show');
-    
-    // Auto-close after 5 seconds
-    setTimeout(() => {
-        hideSuccessMessage();
-    }, 5000);
+    setTimeout(() => hideSuccessModal(), 6000);
 }
 
-function hideSuccessMessage() {
+function hideSuccessModal() {
     successMessage.classList.remove('show');
 }
 
-if (closeSuccessBtn) {
-    closeSuccessBtn.addEventListener('click', hideSuccessMessage);
-}
+closeSuccessBtn?.addEventListener('click', hideSuccessModal);
+successMessage?.addEventListener('click', (e) => {
+    if (e.target === successMessage) hideSuccessModal();
+});
 
-// Close success message when clicking outside
-if (successMessage) {
-    successMessage.addEventListener('click', (e) => {
-        if (e.target === successMessage) {
-            hideSuccessMessage();
+// =====================
+// FORM SUBMISSION (FETCH → /send-enquiry)
+// =====================
+
+if (bookingForm) {
+    bookingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!validateForm()) return;
+
+        setButtonLoading();
+
+        const formData = {
+            fullName: document.getElementById('fullName').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            checkIn: document.getElementById('checkIn').value || '',
+            checkOut: document.getElementById('checkOut').value || '',
+            roomType: document.getElementById('roomType').value || '',
+            message: document.getElementById('message').value.trim() || '',
+        };
+
+        try {
+            const response = await fetch('/send-enquiry', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                setButtonSuccess();
+                showSuccessModal();
+                showToast('success', 'Enquiry sent! Check your email for confirmation.');
+                bookingForm.reset();
+                setTimeout(() => resetButton(), 4000);
+            } else {
+                resetButton();
+                showToast('error', result.message || 'Something went wrong. Please try again.');
+            }
+        } catch (err) {
+            console.error('Submission error:', err);
+            resetButton();
+            showToast('error', 'Network error. Please check your connection and try again.');
         }
     });
 }
 
 // =====================
-// REAL-TIME INPUT VALIDATION
+// REAL-TIME VALIDATION CLEAR
 // =====================
 
 if (bookingForm) {
@@ -410,96 +432,27 @@ if (bookingForm) {
     const checkOut = document.getElementById('checkOut');
 
     fullName.addEventListener('input', () => {
-        if (fullName.value.trim().length >= 3) {
-            fullName.closest('.form-group').classList.remove('error');
-        }
+        if (fullName.value.trim().length >= 3) fullName.closest('.form-group').classList.remove('error');
     });
-
     email.addEventListener('input', () => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (emailRegex.test(email.value.trim())) {
-            email.closest('.form-group').classList.remove('error');
-        }
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) email.closest('.form-group').classList.remove('error');
     });
-
     phone.addEventListener('input', () => {
-        const phoneRegex = /^[0-9\s\-\+\(\)]+$/;
-        if (phoneRegex.test(phone.value.trim()) && phone.value.trim().length >= 10) {
+        if (/^[0-9\s\-\+\(\)]+$/.test(phone.value.trim()) && phone.value.trim().length >= 10) {
             phone.closest('.form-group').classList.remove('error');
         }
     });
-
     checkIn.addEventListener('change', () => {
-        const today = new Date().toISOString().split('T')[0];
-        if (checkIn.value >= today) {
-            checkIn.closest('.form-group').classList.remove('error');
-        }
+        if (checkIn.value >= new Date().toISOString().split('T')[0]) checkIn.closest('.form-group').classList.remove('error');
     });
-
     checkOut.addEventListener('change', () => {
-        if (checkOut.value > checkIn.value) {
-            checkOut.closest('.form-group').classList.remove('error');
-        }
+        if (checkOut.value > checkIn.value) checkOut.closest('.form-group').classList.remove('error');
     });
 
-    // Form field focus effects
-    formInputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            const formGroup = input.closest('.form-group');
-            if (formGroup) {
-                formGroup.style.transform = 'translateY(-2px)';
-            }
-        });
-
-        input.addEventListener('blur', () => {
-            const formGroup = input.closest('.form-group');
-            if (formGroup) {
-                formGroup.style.transform = 'translateY(0)';
-            }
-        });
+    bookingForm.querySelectorAll('input, textarea, select').forEach(input => {
+        input.addEventListener('focus', () => { input.closest('.form-group').style.transform = 'translateY(-2px)'; });
+        input.addEventListener('blur', () => { input.closest('.form-group').style.transform = 'translateY(0)'; });
     });
-}
-
-// =====================
-// ACTIVE NAV LINK HIGHLIGHTING
-// =====================
-
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    let current = '';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-
-        if (window.scrollY >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-            link.classList.add('active');
-        }
-    });
-}
-
-window.addEventListener('scroll', updateActiveNavLink);
-
-// =====================
-// UTILITY FUNCTIONS
-// =====================
-
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
 }
 
 // =====================
@@ -519,14 +472,11 @@ if ('IntersectionObserver' in window) {
             }
         });
     });
-
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
+    document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
 }
 
 // =====================
-// ADD SCROLL ANIMATION STYLES
+// DYNAMIC STYLES
 // =====================
 
 const style = document.createElement('style');
@@ -535,19 +485,94 @@ style.textContent = `
         opacity: 0;
         transform: translateY(30px);
     }
-
     .scroll-animate.visible {
         opacity: 1;
         transform: translateY(0);
-        transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+        transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                     transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Loading spinner inside button */
+    .btn-spinner {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 2px solid rgba(20, 49, 86, 0.25);
+        border-top-color: #143156;
+        border-radius: 50%;
+        animation: btnSpin 0.65s linear infinite;
+        vertical-align: middle;
+        margin-right: 8px;
+    }
+    @keyframes btnSpin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Toast */
+    .enquiry-toast {
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 18px;
+        border-radius: 6px;
+        max-width: 380px;
+        min-width: 260px;
+        background: #fff;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06);
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #1a1a2e;
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+        border-left: 4px solid #ccc;
+    }
+    .enquiry-toast--visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .enquiry-toast--success {
+        border-left-color: #27AE60;
+    }
+    .enquiry-toast--error {
+        border-left-color: #E74C3C;
+    }
+    .enquiry-toast__icon {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+    }
+    .enquiry-toast--success .enquiry-toast__icon svg { stroke: #27AE60; width: 20px; height: 20px; }
+    .enquiry-toast--error .enquiry-toast__icon svg { stroke: #E74C3C; width: 20px; height: 20px; }
+    .enquiry-toast__msg { flex: 1; line-height: 1.5; }
+    .enquiry-toast__close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #bbb;
+        font-size: 13px;
+        padding: 0;
+        flex-shrink: 0;
+        transition: color 0.2s;
+    }
+    .enquiry-toast__close:hover { color: #555; }
+
+    @media (max-width: 480px) {
+        .enquiry-toast {
+            bottom: 16px;
+            right: 16px;
+            left: 16px;
+            max-width: unset;
+        }
     }
 `;
 document.head.appendChild(style);
 
-// =====================
-// INITIALIZATION
-// =====================
-
-console.log('Premium Luxury Hotel Website - Fully Initialized');
-console.log('Features: Hero Slideshow, Smooth Scrolling, Form Validation, Animations');
+console.log('🏨 DEMO HOTEL — Initialized');
