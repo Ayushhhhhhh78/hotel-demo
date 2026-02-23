@@ -4,10 +4,10 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+require("dotenv").config();
 
 // =====================
-// MIDDLEWARE
-// =====================
+// MIDDLEWARE// =====================
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -29,14 +29,6 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Verify transporter connection on startup
-transporter.verify((error, success) => {
-    if (error) {
-        console.error('❌ Email transporter error:', error.message);
-    } else {
-        console.log('✅ Email transporter is ready');
-    }
-});
 
 // =====================
 // ROUTES
