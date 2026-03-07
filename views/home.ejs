@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>DEMO HOTEL</title>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="brand-logo-wrapper">
+                <img src="https://s3-cdn.hotellinksolutions.com/hls/data/2575/website/general/mlg/demo-hl-mob.png"
+                    alt="DEMO HOTEL Logo" class="brand-logo">
+            </div>
+
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#rooms" class="nav-link">Rooms</a></li>
+                <li><a href="#amenities" class="nav-link">Amenities</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#reviews" class="nav-link">Reviews</a></li>
+                <li><a href="#booking" class="nav-link">Book</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Menu -->
+    <div class="sidebar">
+        <button class="close-btn" id="closeBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="sidebar-menu">
+            <li><a href="#home" class="sidebar-link">Home</a></li>
+            <li><a href="#rooms" class="sidebar-link">Rooms</a></li>
+            <li><a href="#amenities" class="sidebar-link">Amenities</a></li>
+            <li><a href="#gallery" class="sidebar-link">Gallery</a></li>
+            <li><a href="#reviews" class="sidebar-link">Reviews</a></li>
+            <li><a href="#booking" class="sidebar-link">Book</a></li>
+            <li><a href="#contact" class="sidebar-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ══════════════════════════════
+         HERO SECTION
+    ══════════════════════════════ -->
+    <section id="home" class="hero-demo">
+        <div class="hero-slideshow">
+            <div class="hero-slide active"
+                style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&q=80&fit=crop');">
+            </div>
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1600&q=80&fit=crop');">
+            </div>
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1600&q=80&fit=crop');">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <!-- <p class="hero-eyebrow hero-animate delay-1">Welcome to Demo Hotel</p> -->
+                <h1 class="hero-title hero-animate delay-2"><em>Welcome to Demo Hotel</em></h1>
+                <div class="hero-divider hero-animate delay-3"><span></span></div>
+                <p class="hero-tagline hero-animate delay-4">Exceptional comfort, timeless elegance, and warm hospitality — crafted for every traveller.</p>
+                <div class="hero-buttons hero-animate delay-5">
+                    <button class="btn btn-primary" id="bookNowBtn">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                    <button class="btn btn-outline" id="viewRoomsBtn">
+                        <i class="fas fa-door-open"></i> View Rooms
+                    </button>
+                </div>
+
+                <!-- Quick stats bar -->
+                <div class="hero-stats hero-animate delay-6">
+                    <div class="hero-stat">
+                        <span class="stat-num">50+</span>
+                        <span class="stat-label">Rooms</span>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat">
+                        <span class="stat-num">4.9★</span>
+                        <span class="stat-label">Rating</span>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat">
+                        <span class="stat-num">24/7</span>
+                        <span class="stat-label">Service</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="slide-arrow left-arrow" id="slideLeft" aria-label="Previous Image">&#10094;</button>
+            <button class="slide-arrow right-arrow" id="slideRight" aria-label="Next Image">&#10095;</button>
+
+            <div class="slide-indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         ROOMS SECTION
+    ══════════════════════════════ -->
+    <section id="rooms" class="rooms-section">
+        <div class="section-header">
+            <p class="section-label">Accommodations</p>
+            <h2>Our Featured Rooms</h2>
+            <p class="section-subtitle">Discover our exquisite room collection, each designed for unparalleled comfort and elegance.</p>
+        </div>
+
+        <div class="rooms-grid">
+            <!-- Deluxe Room -->
+            <div class="room-card">
+                <div class="room-image">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop" alt="Deluxe Room">
+                    <div class="room-image-overlay">
+                        <button class="btn btn-ghost">View Details</button>
+                    </div>
+                    <div class="room-badge">From $250</div>
+                    <div class="room-type-tag">Deluxe</div>
+                </div>
+                <div class="room-info">
+                    <h3>Deluxe Room</h3>
+                    <p class="room-description">Spacious room with premium amenities and breathtaking city views, perfect for solo or couple stays.</p>
+                    <ul class="room-features">
+                        <li><i class="fas fa-wifi"></i> High-Speed WiFi</li>
+                        <li><i class="fas fa-tv"></i> 55" Smart TV</li>
+                        <li><i class="fas fa-bath"></i> Luxury Bath</li>
+                        <li><i class="fas fa-snowflake"></i> Climate Control</li>
+                    </ul>
+                    <div class="room-footer">
+                        <span class="room-price">$250 <small>/night</small></span>
+                        <button class="btn-reserve" data-room="Deluxe Room">Reserve</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Standard Room -->
+            <div class="room-card">
+                <div class="room-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop" alt="Standard Room">
+                    <div class="room-image-overlay">
+                        <button class="btn btn-ghost">View Details</button>
+                    </div>
+                    <div class="room-badge">From $150</div>
+                    <div class="room-type-tag">Standard</div>
+                </div>
+                <div class="room-info">
+                    <h3>Standard Room</h3>
+                    <p class="room-description">Well-appointed room with all essentials for a comfortable and relaxing stay at a great value.</p>
+                    <ul class="room-features">
+                        <li><i class="fas fa-wifi"></i> Free WiFi</li>
+                        <li><i class="fas fa-tv"></i> Smart TV</li>
+                        <li><i class="fas fa-coffee"></i> Tea & Coffee</li>
+                        <li><i class="fas fa-snowflake"></i> Air Conditioning</li>
+                    </ul>
+                    <div class="room-footer">
+                        <span class="room-price">$150 <small>/night</small></span>
+                        <button class="btn-reserve" data-room="Standard Room">Reserve</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Family Suite -->
+            <div class="room-card room-card--featured">
+                <div class="room-image">
+                    <img src="https://images.unsplash.com/photo-1729605412224-147d072d3667?q=80&w=1170&auto=format&fit=crop" alt="Family Suite">
+                    <div class="room-image-overlay">
+                        <button class="btn btn-ghost">View Details</button>
+                    </div>
+                    <div class="room-badge room-badge--gold">From $400</div>
+                    <div class="room-type-tag room-type-tag--gold">Family Suite</div>
+                </div>
+                <div class="room-info">
+                    <h3>Family Suite</h3>
+                    <p class="room-description">Spacious suite with separate living area and two bedrooms — ideal for families and extended stays.</p>
+                    <ul class="room-features">
+                        <li><i class="fas fa-users"></i> Sleeps up to 5</li>
+                        <li><i class="fas fa-couch"></i> Living Room</li>
+                        <li><i class="fas fa-utensils"></i> Kitchenette</li>
+                        <li><i class="fas fa-crown"></i> Premium Amenities</li>
+                    </ul>
+                    <div class="room-footer">
+                        <span class="room-price">$400 <small>/night</small></span>
+                        <button class="btn-reserve" data-room="Family Suite">Reserve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         AMENITIES SECTION
+    ══════════════════════════════ -->
+    <section id="amenities" class="amenities-section">
+        <div class="section-header">
+            <p class="section-label">Facilities</p>
+            <h2>World-Class Amenities</h2>
+            <p class="section-subtitle">Every detail curated to ensure your stay exceeds expectations.</p>
+        </div>
+
+        <div class="amenities-grid">
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-wifi"></i></div>
+                <h3>Free WiFi</h3>
+                <p>Ultra-fast fiber internet across the entire property</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-car"></i></div>
+                <h3>Free Parking</h3>
+                <p>Secure on-site parking available 24 hours a day</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-snowflake"></i></div>
+                <h3>Air Conditioning</h3>
+                <p>Climate-controlled rooms for year-round comfort</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-utensils"></i></div>
+                <h3>Restaurant</h3>
+                <p>In-house dining with local and international cuisine</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-concierge-bell"></i></div>
+                <h3>Room Service</h3>
+                <p>24/7 in-room dining and personalized assistance</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-swimming-pool"></i></div>
+                <h3>Infinity Pool</h3>
+                <p>Heated rooftop pool with panoramic city views</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-spa"></i></div>
+                <h3>Spa & Wellness</h3>
+                <p>Full-service spa with rejuvenating treatments</p>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"><i class="fas fa-dumbbell"></i></div>
+                <h3>Fitness Center</h3>
+                <p>State-of-the-art gym with personal trainer support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         GALLERY SECTION
+    ══════════════════════════════ -->
+    <section id="gallery" class="gallery-section">
+        <div class="section-header">
+            <p class="section-label">Our Spaces</p>
+            <h2>Gallery</h2>
+            <p class="section-subtitle">A glimpse into the world of timeless luxury and refined beauty.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item gallery-item--tall">
+                <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=600&h=700&fit=crop" alt="Lobby">
+                <div class="gallery-overlay"><h3>Grand Lobby</h3></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=700&h=400&fit=crop" alt="Restaurant">
+                <div class="gallery-overlay"><h3>Fine Dining</h3></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1509600110300-21b9d5fedeb7?q=80&w=700&h=400&fit=crop" alt="Pool">
+                <div class="gallery-overlay"><h3>Infinity Pool</h3></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=700&h=400&fit=crop" alt="Spa">
+                <div class="gallery-overlay"><h3>Luxury Spa</h3></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=700&h=400&fit=crop" alt="Suite">
+                <div class="gallery-overlay"><h3>Premium Suites</h3></div>
+            </div>
+        </div>
+
+        <div class="gallery-cta">
+            <button class="btn btn-outline-dark" id="view-gallery">
+                <i class="fas fa-images"></i> View Full Gallery
+            </button>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         GUEST REVIEWS SECTION
+    ══════════════════════════════ -->
+    <section id="reviews" class="reviews-section">
+        <div class="section-header">
+            <p class="section-label">Testimonials</p>
+            <h2>What Our Guests Say</h2>
+            <p class="section-subtitle">Real experiences from real guests who chose Demo Hotel.</p>
+        </div>
+
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Absolutely stunning stay. The room was immaculate, staff were incredibly warm, and the views were breathtaking. Will definitely be returning on our next trip to the city."</p>
+                <div class="review-author">
+                    <div class="review-avatar">SR</div>
+                    <div class="review-meta">
+                        <strong>Sarah Rahman</strong>
+                        <span>Business Traveller · New Delhi</span>
+                    </div>
+                </div>
+                <div class="review-platform"><i class="fab fa-google"></i> Google Review</div>
+            </div>
+
+            <div class="review-card review-card--featured">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Perfect family getaway! The family suite was spacious and had everything we needed. Kids loved the pool. The restaurant food was exceptional. Highly recommended for families."</p>
+                <div class="review-author">
+                    <div class="review-avatar">MK</div>
+                    <div class="review-meta">
+                        <strong>Michael & Karen</strong>
+                        <span>Family Stay · Mumbai</span>
+                    </div>
+                </div>
+                <div class="review-platform"><i class="fab fa-tripadvisor"></i> TripAdvisor</div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="review-text">"Great location, excellent service, and a very comfortable bed! The room service was prompt and the food was delicious. The spa treatment was the highlight of our anniversary stay."</p>
+                <div class="review-author">
+                    <div class="review-avatar">AP</div>
+                    <div class="review-meta">
+                        <strong>Ananya Patel</strong>
+                        <span>Couple Stay · Bangalore</span>
+                    </div>
+                </div>
+                <div class="review-platform"><i class="fab fa-google"></i> Google Review</div>
+            </div>
+        </div>
+
+        <div class="reviews-summary">
+            <div class="reviews-summary-score">
+                <span class="score-num">4.9</span>
+                <div class="score-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <span class="score-label">Based on 240+ reviews</span>
+            </div>
+            <div class="reviews-summary-bars">
+                <div class="bar-row"><span>Cleanliness</span><div class="bar"><div class="bar-fill" style="--w:98%"></div></div><span>9.8</span></div>
+                <div class="bar-row"><span>Service</span><div class="bar"><div class="bar-fill" style="--w:95%"></div></div><span>9.5</span></div>
+                <div class="bar-row"><span>Location</span><div class="bar"><div class="bar-fill" style="--w:92%"></div></div><span>9.2</span></div>
+                <div class="bar-row"><span>Value</span><div class="bar"><div class="bar-fill" style="--w:90%"></div></div><span>9.0</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         NEARBY ATTRACTIONS SECTION
+    ══════════════════════════════ -->
+    <section class="nearby-section">
+        <div class="section-header">
+            <p class="section-label">Location</p>
+            <h2>Nearby Attractions</h2>
+            <p class="section-subtitle">Everything you need is just minutes away from our doorstep.</p>
+        </div>
+
+        <div class="nearby-grid">
+            <div class="nearby-card">
+                <div class="nearby-icon"><i class="fas fa-train"></i></div>
+                <div class="nearby-info">
+                    <h4>Railway Station</h4>
+                    <p>Central Railway Station</p>
+                    <span class="nearby-dist"><i class="fas fa-walking"></i> 10 min walk · 0.8 km</span>
+                </div>
+            </div>
+            <div class="nearby-card">
+                <div class="nearby-icon"><i class="fas fa-bus"></i></div>
+                <div class="nearby-info">
+                    <h4>Bus Stand</h4>
+                    <p>City Bus Terminal</p>
+                    <span class="nearby-dist"><i class="fas fa-walking"></i> 5 min walk · 0.4 km</span>
+                </div>
+            </div>
+            <div class="nearby-card">
+                <div class="nearby-icon"><i class="fas fa-shopping-bag"></i></div>
+                <div class="nearby-info">
+                    <h4>Shopping Market</h4>
+                    <p>Main City Market</p>
+                    <span class="nearby-dist"><i class="fas fa-car"></i> 3 min drive · 1.2 km</span>
+                </div>
+            </div>
+            <div class="nearby-card">
+                <div class="nearby-icon"><i class="fas fa-plane"></i></div>
+                <div class="nearby-info">
+                    <h4>Airport</h4>
+                    <p>International Airport</p>
+                    <span class="nearby-dist"><i class="fas fa-car"></i> 25 min drive · 18 km</span>
+                </div>
+            </div>
+            <div class="nearby-card">
+                <div class="nearby-icon"><i class="fas fa-hospital"></i></div>
+                <div class="nearby-info">
+                    <h4>Hospital</h4>
+                    <p>City General Hospital</p>
+                    <span class="nearby-dist"><i class="fas fa-car"></i> 5 min drive · 2.1 km</span>
+                </div>
+            </div>
+            <div class="nearby-card">
+                <div class="nearby-icon"><i class="fas fa-landmark"></i></div>
+                <div class="nearby-info">
+                    <h4>City Center</h4>
+                    <p>Tourist Attractions Hub</p>
+                    <span class="nearby-dist"><i class="fas fa-walking"></i> 15 min walk · 1.1 km</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         BOOKING FORM SECTION
+    ══════════════════════════════ -->
+    <section id="booking" class="booking-section">
+        <div class="booking-container">
+            <div class="booking-header">
+                <p class="section-label">Reservations</p>
+                <h2>Book Your Stay</h2>
+                <p class="section-subtitle">Send us your enquiry and our team will respond within 24 hours.</p>
+            </div>
+
+            <form class="booking-form" id="bookingForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkIn">Check-in Date</label>
+                        <input type="date" id="checkIn" name="checkIn">
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="checkOut">Check-out Date</label>
+                        <input type="date" id="checkOut" name="checkOut">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="roomType">Room Type</label>
+                        <select id="roomType" name="roomType">
+                            <option value="">Select a room type</option>
+                            <option value="deluxe">Deluxe Room</option>
+                            <option value="standard">Standard Room</option>
+                            <option value="family">Family Suite</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group form-group--full">
+                    <label for="message">Special Requests</label>
+                    <textarea id="message" name="message"
+                        placeholder="Tell us about your stay or any special requirements..." rows="5"></textarea>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-submit" id="submitEnquiryBtn">
+                    <i class="fas fa-paper-plane"></i> Send Enquiry
+                </button>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <div class="success-content">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Thank You</h3>
+                    <p>Your enquiry has been received. We'll be in touch within 24 hours.</p>
+                    <button class="btn btn-outline btn-small" id="closeSuccess" type="button">Close</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         CTA SECTION
+    ══════════════════════════════ -->
+    <section class="cta-section">
+        <div class="cta-bg-image" style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80&fit=crop');"></div>
+        <div class="cta-overlay"></div>
+        <div class="cta-content">
+            <p class="section-label section-label--light">Limited Availability</p>
+            <h2>Book Your Comfortable Stay Today</h2>
+            <p>Our rooms fill fast — secure your perfect stay now and experience hospitality at its finest.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-large" id="ctaBookBtn">
+                    <i class="fas fa-calendar-check"></i> Book Now
+                </button>
+                <a href="https://wa.me/15551234567?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20room%20availability." 
+                   class="btn btn-whatsapp btn-large" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Us
+                </a>
+            </div>
+            <p class="cta-note"><i class="fas fa-shield-alt"></i> Free cancellation · No credit card required to enquire</p>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════
+         FOOTER
+    ══════════════════════════════ -->
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-section footer-section--brand">
+                <h3>DEMO HOTEL</h3>
+                <p>Delivering luxury experiences and timeless elegance since 2010.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#rooms">Rooms & Suites</a></li>
+                    <li><a href="#amenities">Amenities</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#booking">Reservations</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, City</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="452c2b232a052120282a2d2a3120296b262a28">[email&#160;protected]</a></p>
+                <p><i class="fas fa-clock"></i> Open 24 hours</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 DEMO HOTEL. All rights reserved. &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp;
+                <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
