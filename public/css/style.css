@@ -1455,11 +1455,19 @@ p {
 .cta-note {
     font-size: 0.82rem;
     color: rgba(255,255,255,0.4);
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
     gap: 6px;
+    width: max-content;
+    max-width: 100%;
+    text-align: left;
 }
-.cta-note i { color: var(--gold); font-size: 0.75rem; }
+.cta-note i {
+    color: var(--gold);
+    font-size: 0.75rem;
+    margin-top: 0.22em;
+}
 
 /* =====================
    FOOTER
