@@ -176,7 +176,7 @@ function showToast(type, message) {
     document.querySelector('.enquiry-toast')?.remove();
     const icons = {
         success: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>',
-        error:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
+        error:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
     };
     const toast = document.createElement('div');
     toast.className = 'enquiry-toast enquiry-toast--' + type;
@@ -242,41 +242,84 @@ function validateForm() {
 });
 
 // =====================
-// FORM SUBMISSION (DEMO)
+// FORM SUBMISSION (REAL EMAIL SENDING)
 // =====================
 
 const submitBtn = document.getElementById('submitEnquiryBtn');
 
 if (submitBtn) {
-    submitBtn.addEventListener('click', function () {
+    submitBtn.addEventListener('click', async function () {
         if (!validateForm()) return;
 
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span class="btn-spinner"></span> Sending\u2026';
         submitBtn.style.opacity = '0.8';
 
-        setTimeout(function () {
-            submitBtn.innerHTML = '\u2713 Enquiry Sent';
-            submitBtn.style.background = '#1a7a4a';
-            submitBtn.style.borderColor = '#1a7a4a';
-            submitBtn.style.color = '#fff';
-            submitBtn.style.opacity = '1';
+        try {
+            // Gather form data
+            const fullName = document.getElementById('fullName')?.value || '';
+            const email = document.getElementById('email')?.value || '';
+            const phone = document.getElementById('phone')?.value || '';
+            const checkIn = document.getElementById('checkIn')?.value || '';
+            const checkOut = document.getElementById('checkOut')?.value || '';
+            const roomType = document.getElementById('roomType')?.value || '';
+            const message = document.getElementById('message')?.value || '';
 
-            var modal = document.getElementById('successMessage');
-            if (modal) modal.style.display = 'flex';
+            // Send POST request to backend
+            const response = await fetch('/send-enquiry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    phone,
+                    checkIn,
+                    checkOut,
+                    roomType,
+                    message
+                })
+            });
 
-            showToast('success', 'Enquiry sent! Our team will contact you shortly.');
-            document.getElementById('bookingForm')?.reset();
+            const data = await response.json();
 
-            setTimeout(function () {
+            if (data.success) {
+                // Email sent successfully - show success UI
+                submitBtn.innerHTML = '\u2713 Enquiry Sent';
+                submitBtn.style.background = '#1a7a4a';
+                submitBtn.style.borderColor = '#1a7a4a';
+                submitBtn.style.color = '#fff';
+                submitBtn.style.opacity = '1';
+
+                var modal = document.getElementById('successMessage');
+                if (modal) modal.style.display = 'flex';
+
+                showToast('success', 'Enquiry sent! Our team will contact you shortly.');
+                document.getElementById('bookingForm')?.reset();
+
+                setTimeout(function () {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Enquiry';
+                    submitBtn.style.background = '';
+                    submitBtn.style.borderColor = '';
+                    submitBtn.style.color = '';
+                    submitBtn.style.opacity = '1';
+                }, 3000);
+            } else {
+                // Email failed - show error
+                showToast('error', data.message || 'Failed to send enquiry. Please try again.');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Enquiry';
-                submitBtn.style.background = '';
-                submitBtn.style.borderColor = '';
-                submitBtn.style.color = '';
                 submitBtn.style.opacity = '1';
-            }, 3000);
-        }, 900);
+            }
+        } catch (error) {
+            console.error('Error sending enquiry:', error);
+            showToast('error', 'Failed to send enquiry. Please try again later.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Enquiry';
+            submitBtn.style.opacity = '1';
+        }
     });
 }
 
@@ -294,7 +337,7 @@ document.getElementById('successMessage')?.addEventListener('click', function (e
 // =====================
 
 var style = document.createElement('style');
-style.textContent = '.btn-spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(15,23,42,0.2);border-top-color:#0f172a;border-radius:50%;animation:_spin 0.65s linear infinite;vertical-align:middle;margin-right:6px}@keyframes _spin{to{transform:rotate(360deg)}}.enquiry-toast{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:8px;max-width:360px;min-width:240px;background:#fff;box-shadow:0 8px 32px rgba(15,23,42,0.14);font-family:sans-serif;font-size:0.875rem;font-weight:500;color:#0f172a;opacity:0;transform:translateY(12px);transition:opacity 0.35s ease,transform 0.35s ease;border-left:3px solid #ccc}.enquiry-toast--visible{opacity:1;transform:translateY(0)}.enquiry-toast--success{border-left-color:#1a7a4a}.enquiry-toast--error{border-left-color:#c0392b}.enquiry-toast__icon{flex-shrink:0;display:flex;width:18px;height:18px}.enquiry-toast--success .enquiry-toast__icon svg{stroke:#1a7a4a;width:18px;height:18px}.enquiry-toast--error .enquiry-toast__icon svg{stroke:#c0392b;width:18px;height:18px}.enquiry-toast__msg{flex:1;line-height:1.5}.enquiry-toast__close{background:none;border:none;cursor:pointer;color:#94a3b8;font-size:12px;padding:0;flex-shrink:0}@media(max-width:480px){.enquiry-toast{bottom:16px;right:12px;left:12px;max-width:unset}}';
+style.textContent = '.btn-spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(15,23,42,0.2);border-top-color:#0f172a;border-radius:50%;animation:_spin 0.65s linear infinite;vertical-align:-2px}@keyframes _spin{to{transform:rotate(360deg)}}';
 document.head.appendChild(style);
 
 console.log('DEMO HOTEL v3');
