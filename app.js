@@ -5,6 +5,7 @@ dns.setDefaultResultOrder("ipv4first");
 
 const express = require('express');
 const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
 const path = require('path');
 
 const app = express();
@@ -21,6 +22,58 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+// =====================
+// MONGODB CONNECTION
+// =====================
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hotel-demo', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => console.log('✅ MongoDB connected'))
+.catch(err => console.error('❌ MongoDB connection error:', err));
+
+// =====================
+// ENQUIRY SCHEMA & MODEL
+// =====================
+
+const enquirySchema = new mongoose.Schema({
+    fullName: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
+    checkIn: {
+        type: String,
+        default: 'Not specified',
+    },
+    checkOut: {
+        type: String,
+        default: 'Not specified',
+    },
+    roomType: {
+        type: String,
+        default: 'Not selected',
+    },
+    message: {
+        type: String,
+        default: '',
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
+const Enquiry = mongoose.model('Enquiry', enquirySchema);
 
 // =====================
 // NODEMAILER TRANSPORTER
@@ -47,6 +100,7 @@ app.get('/', (req, res) => {
 app.get('/test', (req, res) => {
     res.send("Server working");
 });
+
 // =====================
 // BOOKING ENQUIRY ROUTE
 // =====================
@@ -184,21 +238,37 @@ app.post('/send-enquiry', async (req, res) => {
     };
 
     // ----------------------
-    // Send Both Emails
+    // Send Emails & Save to Database
     // ----------------------
     try {
+        // Send both emails
         await transporter.sendMail(adminMailOptions);
         await transporter.sendMail(guestMailOptions);
 
+        // Save enquiry to MongoDB
+        const newEnquiry = new Enquiry({
+            fullName,
+            email,
+            phone,
+            checkIn: checkIn || 'Not specified',
+            checkOut: checkOut || 'Not specified',
+            roomType: roomType || 'Not selected',
+            message: message || '',
+        });
+
+        await newEnquiry.save();
+
+        console.log('✅ Enquiry saved to database:', newEnquiry._id);
+
         return res.status(200).json({
             success: true,
-            message: 'Enquiry sent successfully!',
+            message: 'Enquiry sent successfully and saved to database!',
         });
     } catch (error) {
-        console.error('❌ Failed to send email:', error.message);
+        console.error('❌ Error:', error.message);
         return res.status(500).json({
             success: false,
-            message: 'Failed to send enquiry. Please try again later.',
+            message: 'Failed to process enquiry. Please try again later.',
         });
     }
 });
