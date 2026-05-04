@@ -27,10 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 // MONGODB CONNECTION
 // =====================
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hotel-demo', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hotel-demo')
 .then(() => console.log('✅ MongoDB connected'))
 .catch(err => console.error('❌ MongoDB connection error:', err));
 
